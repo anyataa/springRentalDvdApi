@@ -17,7 +17,7 @@ public interface actorRepository extends JpaRepository<actorEntity, Integer> {
     @Query(value = "select last_name from actor", nativeQuery = true)
     public List<String> getActorLastName();
 
-    @Query(value = "select * from actor where last_name = ?1 ", nativeQuery = true)
+    @Query(value = "select * from actor where last_name = :wanted_name ", nativeQuery = true)
     public List<actorEntity> getActorLastNameBasedOnParam(@Param("wanted_name") String wanted_name);
     // public List<actorEntity> getActorLastNameBasedOnParam(String wanted_name);
 
