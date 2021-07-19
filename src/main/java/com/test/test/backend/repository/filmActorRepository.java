@@ -13,7 +13,7 @@ public interface filmActorRepository extends JpaRepository<filmActorEntity, Inte
 
     // Find film and actor based on actor_id : To know how many movie an actor plays
     // in
-    @Query(value = "SELECT c.first_name, f.actor_id, f.film_id, m.title, f.film_actor_id, f.last_update FROM actor c LEFT  JOIN film_actor f ON c.actor_id = f.actor_id LEFT  JOIN film m ON m.film_id = f.film_id GROUP BY  f.film_id, f.actor_id, c.first_name, m.title, f.film_actor_id, f.last_update  HAVING f.actor_id = 1", nativeQuery = true)
+    @Query(value = "SELECT .actor_ic.first_name, fd, f.film_id, m.title, f.film_actor_id, f.last_update FROM actor c LEFT  JOIN film_actor f ON c.actor_id = f.actor_id LEFT  JOIN film m ON m.film_id = f.film_id GROUP BY  f.film_id, f.actor_id, c.first_name, m.title, f.film_actor_id, f.last_update  HAVING f.actor_id = 1", nativeQuery = true)
     public List<filmActorEntity> getActorAndFilm();
 
     @Query(value = "SELECT c.first_name, f.actor_id, f.film_id, m.title,f.film_actor_id, f.last_update FROM actor c LEFT JOIN film_actor f ON c.actor_id = f.actor_id LEFT JOIN film m ON m.film_id = f.film_id GROUP BY f.film_id, f.actor_id, c.first_name, m.title , f.film_actor_id, f.last_update HAVING c.first_name ILIKE  :actor_first_name ", nativeQuery = true)

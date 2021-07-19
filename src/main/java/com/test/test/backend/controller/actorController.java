@@ -8,6 +8,7 @@ import com.test.test.backend.model.ResourceNotFound;
 import com.test.test.backend.model.actorEntity;
 import com.test.test.backend.repository.actorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,8 +66,18 @@ public class actorController {
 
     // add actor
     @PostMapping("/createActor")
-    public actorEntity createActor(@Valid @RequestBody actorEntity actor) {
-        return actorRepositoryList.save(actor);
+    public ResponseEntity<?> createActor(@Valid @RequestBody actorEntity actor) {
+        try {
+            actorRepositoryList.save(actor);
+            return ResponseEntity.ok(actor);
+
+        }
+
+        catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e);
+
+        }
+
     }
 
     // delete actor
